@@ -10,7 +10,8 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
 
-var connectionString = builder.Configuration.GetConnectionString("learningCenter");
+var connectionString = builder.Configuration.GetConnectionString("learningCenter")
+    ?? throw new InvalidOperationException("No se encontró la cadena de conexión 'learningCenter'.");
 
 builder.Services.AddDbContext<LearningCenterContext>(options =>
 {
