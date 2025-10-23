@@ -14,12 +14,23 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Contexts\Category\" />
-      <Folder Include="Contexts\Security\" />
+      <Folder Include="Contexts\Category\Application\" />
+      <Folder Include="Contexts\Category\Domain\" />
+      <Folder Include="Contexts\Category\Infraestructure\" />
+      <Folder Include="Contexts\Category\Interfaces\" />
+      <Folder Include="Contexts\Security\Application\" />
+      <Folder Include="Contexts\Security\Domain\" />
+      <Folder Include="Contexts\Security\Infraestructure\" />
+      <Folder Include="Contexts\Security\Interfaces\" />
+      <Folder Include="Contexts\Shared\Application\" />
+      <Folder Include="Contexts\Shared\Domain\Repositories\" />
+      <Folder Include="Contexts\Shared\Interfaces\" />
       <Folder Include="Contexts\Tutorial\Application\" />
       <Folder Include="Contexts\Tutorial\Domain\" />
       <Folder Include="Contexts\Tutorial\Infraestructure\" />
-      <Folder Include="Contexts\Tutorial\Presentation\" />
+      <Folder Include="Contexts\Tutorial\Interfaces\REST\" />
+      <Folder Include="Contexts\Tutorial\Interfaces\SOAP\" />
+      <Folder Include="Contexts\Tutorial\Interfaces\TECh3\" />
     </ItemGroup>
 
 </Project>
