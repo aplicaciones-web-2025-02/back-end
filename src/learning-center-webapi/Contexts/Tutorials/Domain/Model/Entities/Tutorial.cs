@@ -11,19 +11,21 @@ public class Tutorial : BaseEntity
     public DateTime PublishedDate { get; set; }
 
     public string Author { get; set; } = string.Empty;
+    public Email? AuthorEmail { get; set; }
     public int Level { get; set; }
-    public bool IsPublished { get; set; }
+    public bool IsPublished { get; private set; }
     public int Views { get; set; }
     public string? Tags { get; set; }
     public ICollection<Chapter> Chapters { get; set; } = new List<Chapter>();
-    public Duration Duration
+    public Duration Duration => new Duration(
+        Chapters?.Where(c => c.Duration.HasValue)
+            .Select(c => c.Duration!.Value)
+            .Aggregate(TimeSpan.Zero, (acc, d) => acc + d) ?? TimeSpan.Zero
+    );
+
+    public void Publish()
     {
-        get
-        {
-            var total = Chapters?.Where(c => c.Duration.HasValue)
-                .Select(c => c.Duration!.Value)
-                .Aggregate(TimeSpan.Zero, (acc, d) => acc + d) ?? TimeSpan.Zero;
-            return new Duration(total);
-        }
+        if (Chapters == null || Chapters.Count == 0) throw new InvalidOperationException();
+        IsPublished = true;
     }
 }
