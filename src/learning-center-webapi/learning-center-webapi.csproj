@@ -9,28 +9,27 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.9"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.10" />
-        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0" />
-        <PackageReference Include="MySql.EntityFrameworkCore" Version="9.0.6" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.10"/>
+        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0"/>
+        <PackageReference Include="MySql.EntityFrameworkCore" Version="9.0.6"/>
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Contexts\Category\Application\" />
-      <Folder Include="Contexts\Category\Domain\" />
-      <Folder Include="Contexts\Category\Infraestructure\" />
-      <Folder Include="Contexts\Category\Interfaces\" />
-      <Folder Include="Contexts\Security\Application\" />
-      <Folder Include="Contexts\Security\Domain\" />
-      <Folder Include="Contexts\Security\Infraestructure\" />
-      <Folder Include="Contexts\Security\Interfaces\" />
-      <Folder Include="Contexts\Shared\Application\" />
-      <Folder Include="Contexts\Shared\Interfaces\" />
-      <Folder Include="Contexts\Tutorial\Application\" />
-      <Folder Include="Contexts\Tutorial\Domain\" />
-      <Folder Include="Contexts\Tutorial\Infraestructure\" />
-      <Folder Include="Contexts\Tutorial\Interfaces\REST\" />
-      <Folder Include="Contexts\Tutorial\Interfaces\SOAP\" />
-      <Folder Include="Contexts\Tutorial\Interfaces\TECh3\" />
+        <Folder Include="Contexts\Category\Application\"/>
+        <Folder Include="Contexts\Category\Domain\"/>
+        <Folder Include="Contexts\Category\Infraestructure\"/>
+        <Folder Include="Contexts\Category\Interfaces\"/>
+        <Folder Include="Contexts\Security\Application\"/>
+        <Folder Include="Contexts\Security\Domain\"/>
+        <Folder Include="Contexts\Security\Infraestructure\"/>
+        <Folder Include="Contexts\Security\Interfaces\"/>
+        <Folder Include="Contexts\Shared\Application\"/>
+        <Folder Include="Contexts\Shared\Interfaces\"/>
+        <Folder Include="Contexts\Tutorials\Domain\Services\"/>
+        <Folder Include="Contexts\Tutorials\Infraestructure\"/>
+        <Folder Include="Contexts\Tutorials\Interfaces\REST\Resources\"/>
+        <Folder Include="Contexts\Tutorials\Interfaces\REST\Transform\"/>
+        <Folder Include="Contexts\Tutorials\Interfaces\SOAP\"/>
     </ItemGroup>
 
 </Project>

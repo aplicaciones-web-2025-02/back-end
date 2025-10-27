@@ -1,19 +1,19 @@
-using System;
+namespace learning_center_webapi.Contexts.Tutorials.Domain.Model.ValueObjects;
 
-namespace learning_center_webapi.Contexts.Tutorials.Domain.Model.ValueObjects
+public sealed class Duration
 {
-    public sealed class Duration
+    public Duration(TimeSpan value)
     {
-        public TimeSpan Value { get; }
+        Value = value;
+    }
 
-        public double TotalMinutes => Value.TotalMinutes;
-        public double TotalHours => Value.TotalHours;
+    public TimeSpan Value { get; }
 
-        public Duration(TimeSpan value)
-        {
-            Value = value;
-        }
+    public double TotalMinutes => Value.TotalMinutes;
+    public double TotalHours => Value.TotalHours;
 
-        public override string ToString() => Value.ToString();
+    public override string ToString()
+    {
+        return Value.ToString();
     }
 }

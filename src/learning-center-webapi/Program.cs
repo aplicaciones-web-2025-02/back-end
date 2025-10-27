@@ -11,23 +11,19 @@ builder.Services.AddOpenApi();
 
 
 var connectionString = builder.Configuration.GetConnectionString("learningCenter")
-    ?? throw new InvalidOperationException("No se encontró la cadena de conexión 'learningCenter'.");
+                       ?? throw new InvalidOperationException("No se encontró la cadena de conexión 'learningCenter'.");
 
 builder.Services.AddDbContext<LearningCenterContext>(options =>
 {
     options.UseMySQL(connectionString);
 
     if (builder.Environment.IsDevelopment())
-    {
         options.LogTo(Console.WriteLine, LogLevel.Information)
             .EnableSensitiveDataLogging()
             .EnableDetailedErrors();
-    }
     else if (builder.Environment.IsProduction())
-    {
         options.LogTo(Console.WriteLine, LogLevel.Error)
             .EnableDetailedErrors();
-    }
 });
 
 var app = builder.Build();
@@ -41,10 +37,7 @@ using (var scope = app.Services.CreateScope())
 
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-}
+if (app.Environment.IsDevelopment()) app.MapOpenApi();
 
 app.UseHttpsRedirection();
 

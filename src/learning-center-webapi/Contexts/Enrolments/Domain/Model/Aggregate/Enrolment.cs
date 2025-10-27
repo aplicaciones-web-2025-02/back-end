@@ -1,11 +1,7 @@
-using System;
-
-
 using learning_center_webapi.Contexts.Shared.Domain.Model.Entities;
 using learning_center_webapi.Contexts.Tutorials.Domain.Model.Entities;
+
 namespace learning_center_webapi.Contexts.Enrolments.Domain.Model.Aggregate;
-
-
 
 public class Enrolment : BaseEntity
 {

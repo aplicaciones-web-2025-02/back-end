@@ -1,14 +1,14 @@
-﻿using learning_center_webapi.Contexts.Tutorials.Domain.Model.Entities;
-using learning_center_webapi.Contexts.Enrolments.Domain.Model.Aggregate;
+﻿using learning_center_webapi.Contexts.Enrolments.Domain.Model.Aggregate;
+using learning_center_webapi.Contexts.Tutorials.Domain.Model.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace learning_center_webapi.Contexts.Shared.Infraestructure.Persistence.Configuration;
 
 public class LearningCenterContext(DbContextOptions options) : DbContext(options)
 {
-    DbSet<Tutorial> Tutorials { get; set; }
-    DbSet<Chapter> Chapters { get; set; }
-    DbSet<Enrolment> Enrolments { get; set; }
+    private DbSet<Tutorial> Tutorials { get; set; }
+    private DbSet<Chapter> Chapters { get; set; }
+    private DbSet<Enrolment> Enrolments { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder builder)
     {
@@ -23,7 +23,7 @@ public class LearningCenterContext(DbContextOptions options) : DbContext(options
         {
             entity.HasKey(t => t.Id);
             entity.Property(t => t.Id).ValueGeneratedOnAdd();
-            entity.Property(t => t.CreatedDate).IsRequired().HasDefaultValueSql("CURRENT_TIMESTAMP");
+            entity.Property(t => t.CreatedDate).IsRequired();
             entity.Property(t => t.UpdatedDate).IsRequired(false);
             entity.Property(t => t.Title).IsRequired().HasMaxLength(50);
             entity.Property(t => t.Description).HasMaxLength(200).HasColumnName("TutorialDescription");
@@ -43,7 +43,7 @@ public class LearningCenterContext(DbContextOptions options) : DbContext(options
         {
             entity.HasKey(c => c.Id);
             entity.Property(c => c.Id).ValueGeneratedOnAdd();
-            entity.Property(c => c.CreatedDate).IsRequired().HasDefaultValueSql("CURRENT_TIMESTAMP");
+            entity.Property(c => c.CreatedDate).IsRequired();
             entity.Property(c => c.UpdatedDate).IsRequired(false);
             entity.Property(c => c.Name).IsRequired().HasMaxLength(100);
             entity.Property(c => c.Pages).IsRequired().HasColumnName("TotalPages").HasDefaultValue(1);
@@ -59,18 +59,18 @@ public class LearningCenterContext(DbContextOptions options) : DbContext(options
         {
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
-            entity.Property(e => e.CreatedDate).IsRequired().HasDefaultValueSql("CURRENT_TIMESTAMP");
+            entity.Property(e => e.CreatedDate).IsRequired();
             entity.Property(e => e.UpdatedDate).IsRequired(false);
             entity.Property(e => e.UserId).IsRequired();
             entity.Property(e => e.TutorialId).IsRequired();
-            entity.Property(e => e.EnrolmentDate).IsRequired().HasDefaultValueSql("CURRENT_TIMESTAMP");
+            entity.Property(e => e.EnrolmentDate).IsRequired();
             entity.Property(e => e.Progress).IsRequired().HasDefaultValue(0.0);
             entity.Property(e => e.CompletionDate).IsRequired(false);
             entity.HasIndex(e => new { e.UserId, e.TutorialId }).IsUnique();
-                entity.HasOne(e => e.Tutorial)
-                      .WithMany()
-                      .HasForeignKey(e => e.TutorialId)
-                      .OnDelete(DeleteBehavior.Cascade);
+            entity.HasOne(e => e.Tutorial)
+                .WithMany()
+                .HasForeignKey(e => e.TutorialId)
+                .OnDelete(DeleteBehavior.Cascade);
         });
     }
 }
