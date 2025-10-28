@@ -1,4 +1,12 @@
+using learning_center_webapi.Contexts.Shared.Domain.Repositories;
 using learning_center_webapi.Contexts.Shared.Infraestructure.Persistence.Configuration;
+using learning_center_webapi.Contexts.Shared.Infraestructure.Repositories;
+using learning_center_webapi.Contexts.Tutorials.Application.CommandServices;
+using learning_center_webapi.Contexts.Tutorials.Application.QueryServices;
+using learning_center_webapi.Contexts.Tutorials.Domain.Commands;
+using learning_center_webapi.Contexts.Tutorials.Domain.Infraestructure;
+using learning_center_webapi.Contexts.Tutorials.Domain.Queries;
+using learning_center_webapi.Contexts.Tutorials.Infraestructure;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,6 +33,13 @@ builder.Services.AddDbContext<LearningCenterContext>(options =>
         options.LogTo(Console.WriteLine, LogLevel.Error)
             .EnableDetailedErrors();
 });
+
+//Dependency injection
+builder.Services.AddTransient<ITutorialRepository, TutorialRepository>();
+builder.Services.AddTransient<ITutorialQueryService, TutorialQueryService>();
+builder.Services.AddTransient<ITutorialCommandService, TutorialCommandService>();
+builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+
 
 var app = builder.Build();
 

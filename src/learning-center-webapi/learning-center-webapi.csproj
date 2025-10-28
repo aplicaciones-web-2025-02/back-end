@@ -25,10 +25,6 @@
         <Folder Include="Contexts\Security\Interfaces\"/>
         <Folder Include="Contexts\Shared\Application\"/>
         <Folder Include="Contexts\Shared\Interfaces\"/>
-        <Folder Include="Contexts\Tutorials\Domain\Services\"/>
-        <Folder Include="Contexts\Tutorials\Infraestructure\"/>
-        <Folder Include="Contexts\Tutorials\Interfaces\REST\Resources\"/>
-        <Folder Include="Contexts\Tutorials\Interfaces\REST\Transform\"/>
         <Folder Include="Contexts\Tutorials\Interfaces\SOAP\"/>
     </ItemGroup>
 
