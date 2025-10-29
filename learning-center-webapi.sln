@@ -1,6 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{00000000-0000-0000-0000-000000000000}") = "learning-center-webapi", "src\learning-center-webapi\learning-center-webapi.csproj", "{00000000-0000-0000-0000-000000000000}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36603.0 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "learning-center-webapi", "src\learning-center-webapi\learning-center-webapi.csproj", "{780F38A0-1CE6-447B-A4D2-D1347FD0522C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -8,7 +11,12 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{00000000-0000-0000-0000-000000000000}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{00000000-0000-0000-0000-000000000000}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{780F38A0-1CE6-447B-A4D2-D1347FD0522C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{780F38A0-1CE6-447B-A4D2-D1347FD0522C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{780F38A0-1CE6-447B-A4D2-D1347FD0522C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{780F38A0-1CE6-447B-A4D2-D1347FD0522C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal

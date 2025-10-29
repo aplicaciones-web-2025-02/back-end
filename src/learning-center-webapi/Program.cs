@@ -1,3 +1,7 @@
+using learning_center_webapi.Contexts.Enrolments.Application.CommandServices;
+using learning_center_webapi.Contexts.Enrolments.Application.QueryServices;
+using learning_center_webapi.Contexts.Enrolments.Domain.Infraestructure;
+using learning_center_webapi.Contexts.Enrolments.Infraestructure;
 using learning_center_webapi.Contexts.Shared.Domain.Repositories;
 using learning_center_webapi.Contexts.Shared.Infraestructure.Persistence.Configuration;
 using learning_center_webapi.Contexts.Shared.Infraestructure.Repositories;
@@ -34,11 +38,17 @@ builder.Services.AddDbContext<LearningCenterContext>(options =>
             .EnableDetailedErrors();
 });
 
-//Dependency injection
+
+//Dependency injection Tutorials
 builder.Services.AddTransient<ITutorialRepository, TutorialRepository>();
 builder.Services.AddTransient<ITutorialQueryService, TutorialQueryService>();
 builder.Services.AddTransient<ITutorialCommandService, TutorialCommandService>();
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+
+//Dependency injection Enrolments
+builder.Services.AddTransient<IEnrolmentRepository, EnrolmentRepository>();
+builder.Services.AddTransient<IEnrolmentQueryService, EnrolmentQueryService>();
+builder.Services.AddTransient<IEnrolmentCommandService, EnrolmentCommandService>();
 
 
 var app = builder.Build();

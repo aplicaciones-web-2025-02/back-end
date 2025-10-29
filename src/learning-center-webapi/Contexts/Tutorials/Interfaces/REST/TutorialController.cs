@@ -8,18 +8,22 @@ namespace learning_center_webapi.Contexts.Tutorials.Interfaces.REST;
 
 [Route("api/[controller]")]
 [ApiController]
-public class TutorialController : ControllerBase
+public class TutorialController(
+    ITutorialQueryService tutorialQueryService,
+    ITutorialCommandService tutorialCommandService) : ControllerBase
 {
-    private readonly ITutorialCommandService _tutorialCommandService;
-    private readonly ITutorialQueryService _tutorialQueryService;
+    private readonly ITutorialCommandService _tutorialCommandService = tutorialCommandService;
+    private readonly ITutorialQueryService _tutorialQueryService = tutorialQueryService;
 
-    //inyeccion de dpendencias
+    // Classic constructor (commented for reference)
+    /*
     public TutorialController(ITutorialQueryService tutorialQueryService,
         ITutorialCommandService tutorialCommandService)
     {
         _tutorialQueryService = tutorialQueryService;
         _tutorialCommandService = tutorialCommandService;
     }
+    */
 
 
     /// // GET: api/

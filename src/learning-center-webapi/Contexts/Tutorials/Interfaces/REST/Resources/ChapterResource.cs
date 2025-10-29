@@ -2,5 +2,5 @@
 
 public class ChapterResource
 {
-    public string ChapterName { get; set; }
+    public required string ChapterName { get; set; }
 }

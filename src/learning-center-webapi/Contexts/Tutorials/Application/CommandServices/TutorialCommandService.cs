@@ -1,24 +1,45 @@
 ﻿using learning_center_webapi.Contexts.Shared.Domain.Repositories;
 using learning_center_webapi.Contexts.Tutorials.Domain.Commands;
+using learning_center_webapi.Contexts.Tutorials.Domain.Exceptions;
 using learning_center_webapi.Contexts.Tutorials.Domain.Infraestructure;
 using learning_center_webapi.Contexts.Tutorials.Domain.Model.Entities;
 
 namespace learning_center_webapi.Contexts.Tutorials.Application.CommandServices;
 
-public class TutorialCommandService : ITutorialCommandService
+public class TutorialCommandService(ITutorialRepository tutorialRepository, IUnitOfWork unitOfWork)
+    : ITutorialCommandService
 {
-    private readonly ITutorialRepository _tutorialRepository;
-    private readonly IUnitOfWork _unitOfWork;
+    private const int MaxTutorialsPerAuthor = 10;
+    private const int MinLevel = 1;
+    private const int MaxLevel = 5;
 
+    //private readonly ITutorialRepository _tutorialRepository = tutorialRepository;
+    //private readonly IUnitOfWork _unitOfWork = unitOfWork;
+
+    // Classic constructor (commented for reference)
+    /*
     public TutorialCommandService(ITutorialRepository repository, IUnitOfWork unitOfWork)
     {
         _tutorialRepository = repository;
         _unitOfWork = unitOfWork;
     }
+    */
 
     public async Task<Tutorial> Handle(CreateTutorialCommand command)
     {
-        var tutorial = new Tutorial
+        var tutorial = CreateTutorialFromCommand(command);
+        var authorTutorials = await tutorialRepository.GetTutorialsWithChaptersAsync();
+
+        await ValidateDuplicateTitle(tutorial.Title);
+
+        await tutorialRepository.AddAsync(tutorial);
+        await unitOfWork.CompleteAsync();
+        return tutorial;
+    }
+
+    private Tutorial CreateTutorialFromCommand(CreateTutorialCommand command)
+    {
+        return new Tutorial
         {
             Title = command.Title,
             Description = command.Description,
@@ -30,19 +51,12 @@ public class TutorialCommandService : ITutorialCommandService
             Tags = command.Tags,
             CreatedDate = DateTime.Now
         };
+    }
 
-
-        //var existingTutorials = await _tutorialRepository.ListAsync();//error GRAVE
-        //var duplicated = existingTutorials.FirstOrDefault(t => t.Title == tutorial.Title);
-
-        var existingTutorial = await _tutorialRepository.GetTutoriaByTitleAsync(tutorial.Title);
-        if (existingTutorial != null) throw new ArgumentException("Tutorial with the title already exists");
-
-
-        await _tutorialRepository.AddAsync(tutorial);
-
-        await _unitOfWork.CompleteAsync();
-
-        return tutorial;
+    private async Task ValidateDuplicateTitle(string title)
+    {
+        var existingTutorial = await tutorialRepository.GetTutoriaByTitleAsync(title);
+        if (existingTutorial != null)
+            throw new DuplicateTutorialTitleException(title);
     }
 }

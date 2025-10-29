@@ -6,6 +6,13 @@ namespace learning_center_webapi.Contexts.Shared.Infraestructure.Persistence.Con
 
 public class LearningCenterContext(DbContextOptions options) : DbContext(options)
 {
+    // Classic constructor (commented for reference)
+    /*
+    public LearningCenterContext(DbContextOptions options) : base(options)
+    {
+        // ...
+    }
+    */
     private DbSet<Tutorial> Tutorials { get; set; }
     private DbSet<Chapter> Chapters { get; set; }
     private DbSet<Enrolment> Enrolments { get; set; }
@@ -23,7 +30,9 @@ public class LearningCenterContext(DbContextOptions options) : DbContext(options
         {
             entity.HasKey(t => t.Id);
             entity.Property(t => t.Id).ValueGeneratedOnAdd();
-            entity.Property(t => t.CreatedDate).IsRequired();
+            entity.Property(t => t.CreatedDate)
+                .IsRequired()
+                .HasDefaultValueSql("GETDATE() ");
             entity.Property(t => t.UpdatedDate).IsRequired(false);
             entity.Property(t => t.Title).IsRequired().HasMaxLength(50);
             entity.Property(t => t.Description).HasMaxLength(200).HasColumnName("TutorialDescription");
@@ -43,7 +52,9 @@ public class LearningCenterContext(DbContextOptions options) : DbContext(options
         {
             entity.HasKey(c => c.Id);
             entity.Property(c => c.Id).ValueGeneratedOnAdd();
-            entity.Property(c => c.CreatedDate).IsRequired();
+            entity.Property(c => c.CreatedDate)
+                .IsRequired()
+                .HasDefaultValueSql("GETDATE() ");
             entity.Property(c => c.UpdatedDate).IsRequired(false);
             entity.Property(c => c.Name).IsRequired().HasMaxLength(100);
             entity.Property(c => c.Pages).IsRequired().HasColumnName("TotalPages").HasDefaultValue(1);
@@ -59,7 +70,9 @@ public class LearningCenterContext(DbContextOptions options) : DbContext(options
         {
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
-            entity.Property(e => e.CreatedDate).IsRequired();
+            entity.Property(e => e.CreatedDate)
+                .IsRequired()
+                .HasDefaultValueSql("GETDATE() ");
             entity.Property(e => e.UpdatedDate).IsRequired(false);
             entity.Property(e => e.UserId).IsRequired();
             entity.Property(e => e.TutorialId).IsRequired();

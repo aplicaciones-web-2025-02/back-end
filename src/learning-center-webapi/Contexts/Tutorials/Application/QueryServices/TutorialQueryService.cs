@@ -5,14 +5,17 @@ using learning_center_webapi.Contexts.Tutorials.Domain.Queries;
 
 namespace learning_center_webapi.Contexts.Tutorials.Application.QueryServices;
 
-public class TutorialQueryService : ITutorialQueryService
+public class TutorialQueryService(ITutorialRepository tutorialRepository) : ITutorialQueryService
 {
-    private readonly ITutorialRepository _tutorialRepository;
+    private readonly ITutorialRepository _tutorialRepository = tutorialRepository;
 
+    // Classic constructor (commented for reference)
+    /*
     public TutorialQueryService(ITutorialRepository tutorialRepository)
     {
         _tutorialRepository = tutorialRepository;
     }
+    */
 
     public async Task<Tutorial?> Handle(GetByidTutorial query)
     {
