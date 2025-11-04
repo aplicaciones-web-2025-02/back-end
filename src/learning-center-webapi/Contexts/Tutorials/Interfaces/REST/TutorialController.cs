@@ -1,4 +1,5 @@
 using learning_center_webapi.Contexts.Tutorials.Domain.Commands;
+using learning_center_webapi.Contexts.Tutorials.Domain.Exceptions;
 using learning_center_webapi.Contexts.Tutorials.Domain.Model.Queries;
 using learning_center_webapi.Contexts.Tutorials.Domain.Queries;
 using learning_center_webapi.Contexts.Tutorials.Interfaces.REST.Transform;
@@ -24,7 +25,6 @@ public class TutorialController(
         _tutorialCommandService = tutorialCommandService;
     }
     */
-
 
     /// // GET: api/
     /// <TutorialController>
@@ -77,9 +77,34 @@ public class TutorialController(
 
     // PUT api/<TutorialController>/5
     [HttpPut("{id}")]
-    public void Put(int id, [FromBody] string value)
+    public async Task<IActionResult> Put(int id, [FromBody] UpdateTutorialCommand command)
     {
+        try
+        {
+            command.Id = id;
+            var result = await _tutorialCommandService.Handle(command);
+
+            return Ok("Tutorial updated successfully.");
+        }
+        catch (TutorialNotFoundException exception)
+        {
+            return StatusCode(404, exception.Message);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
     }
+
+    [HttpPatch( "{id}")]
+    public IActionResult Patch(int id, [FromBody] UpdateAuthorTutorialCommand command)
+    {
+         command.Id = id;
+         var result =  _tutorialCommandService.Handle(command);
+         
+         return Ok("Author updated successfully.");
+    }
+
 
     // DELETE api/<TutorialController>/5
     [HttpDelete("{id}")]

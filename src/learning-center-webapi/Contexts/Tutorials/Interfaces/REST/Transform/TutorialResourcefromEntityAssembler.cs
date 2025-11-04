@@ -18,6 +18,7 @@ public static class TutorialResourceFromEntityAssembler
 
         return new TutorialResource
         {
+            Id = tutorial.Id,
             Title = tutorial.Title,
             Description = tutorial.Description,
             Author = tutorial.Author,

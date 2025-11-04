@@ -37,6 +37,42 @@ public class TutorialCommandService(ITutorialRepository tutorialRepository, IUni
         return tutorial;
     }
 
+    public async Task<Tutorial> Handle(UpdateTutorialCommand command)
+    {
+        var tutorial = await tutorialRepository.FindByIdAsync(command.Id);
+        if (tutorial == null)
+            throw new TutorialNotFoundException(command.Id);   
+        
+        tutorial.Title = command.Title;
+        tutorial.Description = command.Description;
+        tutorial.PublishedDate = command.PublishedDate;
+        tutorial.Author = command.Author;
+        tutorial.AuthorEmail = command.AuthorEmail;
+        tutorial.Level = command.Level;
+        tutorial.Views = command.Views; 
+        tutorial.Tags = command.Tags;
+
+        tutorialRepository.Update(tutorial);
+        await unitOfWork.CompleteAsync();
+
+        return tutorial;    
+    }
+
+    public async Task<Tutorial> Handle(UpdateAuthorTutorialCommand command)
+    {
+        var tutorial = await tutorialRepository.FindByIdAsync(command.Id);
+
+        if (tutorial == null)
+            throw new TutorialNotFoundException(command.Id);   
+        
+        tutorial.Author = command.Author;
+        tutorialRepository.Update(tutorial);
+        
+        await unitOfWork.CompleteAsync();
+
+        return tutorial; 
+    }
+
     private Tutorial CreateTutorialFromCommand(CreateTutorialCommand command)
     {
         return new Tutorial
