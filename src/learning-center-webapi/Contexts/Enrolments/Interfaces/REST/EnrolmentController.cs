@@ -33,13 +33,13 @@ public class EnrolmentController(EnrolmentCommandService commandService, Enrolme
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(int id, [FromBody] UpdateEnrolmentCommand command)
+    public IActionResult Update(int id, [FromBody] UpdateEnrolmentCommand command)
     {
         return Ok();
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(int id)
+    public IActionResult Delete(int id)
     {
         return NoContent();
     }
