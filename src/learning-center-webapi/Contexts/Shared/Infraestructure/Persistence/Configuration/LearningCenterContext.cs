@@ -31,8 +31,8 @@ public class LearningCenterContext(DbContextOptions options) : DbContext(options
             entity.HasKey(t => t.Id);
             entity.Property(t => t.Id).ValueGeneratedOnAdd();
             entity.Property(t => t.CreatedDate)
-                .IsRequired()
-                .HasDefaultValueSql("GETDATE() ");
+                .IsRequired();
+                //.HasDefaultValueSql("GETDATE() ");
             entity.Property(t => t.UpdatedDate).IsRequired(false);
             entity.Property(t => t.Title).IsRequired().HasMaxLength(50);
             entity.Property(t => t.Description).HasMaxLength(200).HasColumnName("TutorialDescription");
@@ -42,6 +42,7 @@ public class LearningCenterContext(DbContextOptions options) : DbContext(options
             entity.Property(t => t.Views).IsRequired().HasDefaultValue(0);
             entity.Property(t => t.Tags).HasMaxLength(200);
             entity.HasIndex(t => t.Title).IsUnique();
+            entity.Property(t => t.IsDeleted).IsRequired().HasDefaultValue(0);
             entity.HasMany(t => t.Chapters)
                 .WithOne(c => c.Tutorial)
                 .HasForeignKey(c => c.TutorialId)
@@ -53,8 +54,7 @@ public class LearningCenterContext(DbContextOptions options) : DbContext(options
             entity.HasKey(c => c.Id);
             entity.Property(c => c.Id).ValueGeneratedOnAdd();
             entity.Property(c => c.CreatedDate)
-                .IsRequired()
-                .HasDefaultValueSql("GETDATE() ");
+                .IsRequired();//;
             entity.Property(c => c.UpdatedDate).IsRequired(false);
             entity.Property(c => c.Name).IsRequired().HasMaxLength(100);
             entity.Property(c => c.Pages).IsRequired().HasColumnName("TotalPages").HasDefaultValue(1);
@@ -63,6 +63,7 @@ public class LearningCenterContext(DbContextOptions options) : DbContext(options
             entity.Property(c => c.Duration).IsRequired(false);
             entity.Property(c => c.TutorialId).IsRequired();
             entity.HasIndex(c => c.Name);
+            entity.Property(t => t.IsDeleted).IsRequired().HasDefaultValue(0);
             entity.HasIndex(c => new { c.TutorialId, c.Order }).IsUnique();
         });
 
@@ -71,8 +72,8 @@ public class LearningCenterContext(DbContextOptions options) : DbContext(options
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
             entity.Property(e => e.CreatedDate)
-                .IsRequired()
-                .HasDefaultValueSql("GETDATE() ");
+                .IsRequired();
+                //.HasDefaultValueSql("GETDATE() ");
             entity.Property(e => e.UpdatedDate).IsRequired(false);
             entity.Property(e => e.UserId).IsRequired();
             entity.Property(e => e.TutorialId).IsRequired();
@@ -80,6 +81,7 @@ public class LearningCenterContext(DbContextOptions options) : DbContext(options
             entity.Property(e => e.Progress).IsRequired().HasDefaultValue(0.0);
             entity.Property(e => e.CompletionDate).IsRequired(false);
             entity.HasIndex(e => new { e.UserId, e.TutorialId }).IsUnique();
+            entity.Property(t => t.IsDeleted).IsRequired().HasDefaultValue(0);
             entity.HasOne(e => e.Tutorial)
                 .WithMany()
                 .HasForeignKey(e => e.TutorialId)

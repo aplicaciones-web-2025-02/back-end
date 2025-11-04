@@ -61,16 +61,32 @@ public class TutorialCommandService(ITutorialRepository tutorialRepository, IUni
     public async Task<Tutorial> Handle(UpdateAuthorTutorialCommand command)
     {
         var tutorial = await tutorialRepository.FindByIdAsync(command.Id);
+        if (tutorial == null)
+            throw new TutorialNotFoundException(command.Id);   
 
+        tutorial.Author = command.Author;
+
+        tutorialRepository.Update(tutorial);
+        await unitOfWork.CompleteAsync();
+
+    return tutorial;
+    }
+
+    public async Task<Boolean> Handle(DeleteTutorialCommand command)
+    {
+        var tutorial = await tutorialRepository.FindByIdAsync(command.Id);
         if (tutorial == null)
             throw new TutorialNotFoundException(command.Id);   
         
-        tutorial.Author = command.Author;
+        /*tutorialRepository.Remove(tutorial);*/
+        
+        tutorial.IsDeleted = 1;
         tutorialRepository.Update(tutorial);
+        
         
         await unitOfWork.CompleteAsync();
 
-        return tutorial; 
+        return true;
     }
 
     private Tutorial CreateTutorialFromCommand(CreateTutorialCommand command)

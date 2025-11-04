@@ -9,4 +9,5 @@ public interface ITutorialCommandService
     
     Task<Tutorial> Handle(UpdateAuthorTutorialCommand command);
 
+    Task<Boolean> Handle(DeleteTutorialCommand command);
 }

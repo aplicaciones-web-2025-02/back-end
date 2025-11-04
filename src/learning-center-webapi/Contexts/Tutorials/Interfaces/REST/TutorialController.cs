@@ -96,19 +96,42 @@ public class TutorialController(
         }
     }
 
-    [HttpPatch( "{id}")]
-    public IActionResult Patch(int id, [FromBody] UpdateAuthorTutorialCommand command)
+    [HttpPatch("{id}")]
+    public async Task<IActionResult> Patch(int id, [FromBody] UpdateAuthorTutorialCommand command)
     {
-         command.Id = id;
-         var result =  _tutorialCommandService.Handle(command);
-         
-         return Ok("Author updated successfully.");
+        try
+        {
+            command.Id = id;
+            var result = await _tutorialCommandService.Handle(command);
+            return Ok("Author updated successfully.");
+        }
+        catch (TutorialNotFoundException exception)
+        {
+            return StatusCode(404, exception.Message);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
     }
-
 
     // DELETE api/<TutorialController>/5
     [HttpDelete("{id}")]
-    public void Delete(int id)
+    public async Task<IActionResult> Delete(int id)
     {
+        try{
+            var command = new DeleteTutorialCommand { Id = id };
+            
+            var result = await _tutorialCommandService.Handle(command);
+            
+            if (result)
+                return Ok("Tutorial deleted successfully.");
+            
+            return StatusCode(407, "Could not delete the tutorial.");
+        }
+        catch (TutorialNotFoundException exception)
+        {
+            return StatusCode(404, exception.Message);
+        }
     }
 }
