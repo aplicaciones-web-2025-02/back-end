@@ -7,7 +7,7 @@ namespace learning_center_webapi.Contexts.Enrolments.Interfaces.REST;
 
 [ApiController]
 [Route("api/[controller]")]
-public class EnrolmentController(EnrolmentCommandService commandService, EnrolmentQueryService queryService)
+public class EnrolmentController(IEnrolmentCommandService commandService, IEnrolmentQueryService queryService)
     : ControllerBase
 {
     [HttpGet]
@@ -29,7 +29,7 @@ public class EnrolmentController(EnrolmentCommandService commandService, Enrolme
     public async Task<IActionResult> Create([FromBody] CreateEnrolmentCommand command)
     {
         var result = await commandService.CreateAsync(command);
-        return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
+        return CreatedAtAction(nameof(GetById), new { id = result.Id }, result.Id);
     }
 
     [HttpPut("{id}")]

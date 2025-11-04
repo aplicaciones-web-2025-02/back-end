@@ -1,5 +1,7 @@
 ﻿using learning_center_webapi.Contexts.Enrolments.Domain.Model.Aggregate;
+using learning_center_webapi.Contexts.Security.Domain.Model.Entities;
 using learning_center_webapi.Contexts.Tutorials.Domain.Model.Entities;
+using learning_center_webapi.Contexts.Security.Domain.Model.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace learning_center_webapi.Contexts.Shared.Infraestructure.Persistence.Configuration;
@@ -16,6 +18,7 @@ public class LearningCenterContext(DbContextOptions options) : DbContext(options
     private DbSet<Tutorial> Tutorials { get; set; }
     private DbSet<Chapter> Chapters { get; set; }
     private DbSet<Enrolment> Enrolments { get; set; }
+    public DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder builder)
     {
@@ -87,5 +90,15 @@ public class LearningCenterContext(DbContextOptions options) : DbContext(options
                 .HasForeignKey(e => e.TutorialId)
                 .OnDelete(DeleteBehavior.Cascade);
         });
+    
+            builder.Entity<User>(entity =>
+        {
+            entity.HasKey(u => u.Id);
+            entity.Property(u => u.Id).ValueGeneratedOnAdd();
+            entity.Property(u => u.Username).IsRequired().HasMaxLength(50);
+            entity.Property(u => u.Password).IsRequired().HasMaxLength(200);
+            entity.HasIndex(u => u.Username).IsUnique();
+        });
+    
     }
 }
