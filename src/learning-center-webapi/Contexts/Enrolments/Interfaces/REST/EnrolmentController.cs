@@ -18,7 +18,7 @@ public class EnrolmentController(EnrolmentCommandService commandService, Enrolme
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetById(int id)
+    public async Task<IActionResult> GetById(Guid id)
     {
         var enrolment = await queryService.GetByIdAsync(id);
         if (enrolment == null) return NotFound();

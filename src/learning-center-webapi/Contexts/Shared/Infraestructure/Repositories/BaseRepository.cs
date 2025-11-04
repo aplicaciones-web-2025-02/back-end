@@ -18,7 +18,7 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
         await _context.AddAsync(entity); //'insert into table value("'
     }
 
-    public async Task<TEntity?> FindByIdAsync(int id)
+    public async Task<TEntity?> FindByIdAsync(Guid id)
     {
         // 'select * from table where id = ...'
         return await _context.Set<TEntity>().FindAsync(id);

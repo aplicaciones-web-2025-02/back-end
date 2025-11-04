@@ -21,7 +21,7 @@ public class Chapter : BaseEntity
     public int Order { get; set; }
     public string? Summary { get; set; }
     public TimeSpan? Duration { get; private set; }
-    public int TutorialId { get; set; }
+    public Guid TutorialId { get; set; }
     public Tutorial Tutorial { get; set; } = null!;
 
     public void UpdateDuration(TimeSpan duration)

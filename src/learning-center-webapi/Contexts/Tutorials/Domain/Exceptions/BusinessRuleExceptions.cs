@@ -10,7 +10,7 @@ public class DuplicateTutorialTitleException : Exception
 }
 public class TutorialNotFoundException : Exception
 {
-    public TutorialNotFoundException(int id)
+    public TutorialNotFoundException(Guid id)
         : base($"A tutorial with the id '{id}' doesn't exists.")
     {
     }

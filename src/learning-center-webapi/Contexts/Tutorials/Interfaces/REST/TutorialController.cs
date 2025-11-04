@@ -43,7 +43,7 @@ public class TutorialController(
 
     // GET api/<TutorialController>/5
     [HttpGet("{id}")]
-    public async Task<IActionResult> Get(int id)
+    public async Task<IActionResult> Get(Guid id)
     {
         var query = new GetByidTutorial(id);
         var tutorial = await _tutorialQueryService.Handle(query);
@@ -71,13 +71,14 @@ public class TutorialController(
         }
         catch (Exception ex)
         {
+            //logear
             return StatusCode(500, ex.Message);
         }
     }
 
     // PUT api/<TutorialController>/5
     [HttpPut("{id}")]
-    public async Task<IActionResult> Put(int id, [FromBody] UpdateTutorialCommand command)
+    public async Task<IActionResult> Put(Guid id, [FromBody] UpdateTutorialCommand command)
     {
         try
         {
@@ -97,7 +98,7 @@ public class TutorialController(
     }
 
     [HttpPatch("{id}")]
-    public async Task<IActionResult> Patch(int id, [FromBody] UpdateAuthorTutorialCommand command)
+    public async Task<IActionResult> Patch(Guid id, [FromBody] UpdateAuthorTutorialCommand command)
     {
         try
         {
@@ -111,13 +112,14 @@ public class TutorialController(
         }
         catch (Exception ex)
         {
+            //logear 
             return StatusCode(500, ex.Message);
         }
     }
 
     // DELETE api/<TutorialController>/5
     [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(int id)
+    public async Task<IActionResult> Delete(Guid id)
     {
         try{
             var command = new DeleteTutorialCommand { Id = id };

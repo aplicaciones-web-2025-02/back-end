@@ -5,5 +5,5 @@ namespace learning_center_webapi.Contexts.Enrolments.Application.QueryServices;
 public interface IEnrolmentQueryService
 {
     Task<IEnumerable<Enrolment>> GetAllAsync();
-    Task<Enrolment?> GetByIdAsync(int id);
+    Task<Enrolment?> GetByIdAsync(Guid id);
 }

@@ -16,7 +16,7 @@ public class TutorialRepository(LearningCenterContext context) : BaseRepository<
         return result;
     }
 
-    public async Task<Tutorial?> GetTutorialWithChaptersAsync(int id)
+    public async Task<Tutorial?> GetTutorialWithChaptersAsync(Guid id)
     {
         var result = await _context.Set<Tutorial>().Include(t => t.Chapters).FirstOrDefaultAsync(t => t.Id == id && t.IsDeleted==0);
         return result;

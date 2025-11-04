@@ -10,7 +10,7 @@ public class EnrolmentQueryService(IEnrolmentRepository enrolmentRepository) : I
         return await enrolmentRepository.ListAsync();
     }
 
-    public async Task<Enrolment?> GetByIdAsync(int id)
+    public async Task<Enrolment?> GetByIdAsync(Guid id)
     {
         return await enrolmentRepository.FindByIdAsync(id);
     }

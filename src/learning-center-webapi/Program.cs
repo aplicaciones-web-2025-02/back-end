@@ -22,6 +22,30 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
 
+// Add CORS policy - POR SER FREE SERVER LO PERMITO TODO
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", builder =>
+    {
+        builder.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+    });
+});
+
+/* IDEAL CORS POLICY EXAMPLE
+ var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+        policy  =>
+        {
+            policy.WithOrigins("http://rutafront.com");
+        });
+});
+*/
+
+
 var connectionString = builder.Configuration.GetConnectionString("learningCenter")
                        ?? throw new InvalidOperationException("No se encontró la cadena de conexión 'learningCenter'.");
 
@@ -53,6 +77,10 @@ builder.Services.AddTransient<IEnrolmentCommandService, EnrolmentCommandService>
 
 var app = builder.Build();
 
+
+
+//app.UseCors(MyAllowSpecificOrigins);
+app.UseCors("AllowAll");
 // Ensure DB is created
 using (var scope = app.Services.CreateScope())
 {

@@ -2,10 +2,10 @@
 
 public class GetByidTutorial
 {
-    public GetByidTutorial(int tutorialId)
+    public GetByidTutorial(Guid tutorialId)
     {
         Id = tutorialId;
     }
 
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 }
