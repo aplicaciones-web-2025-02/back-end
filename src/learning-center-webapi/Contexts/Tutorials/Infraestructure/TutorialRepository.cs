@@ -12,19 +12,20 @@ public class TutorialRepository(LearningCenterContext context) : BaseRepository<
 
     public async Task<IEnumerable<Tutorial>> GetTutorialsWithChaptersAsync()
     {
-        var result = await _context.Set<Tutorial>().Include(t => t.Chapters).Where(t => t.IsDeleted ==0 ).ToListAsync();
+        var result = await _context.Set<Tutorial>().Include(t => t.Chapters).Where(t => t.IsDeleted == 0).ToListAsync();
         return result;
     }
 
     public async Task<Tutorial?> GetTutorialWithChaptersAsync(Guid id)
     {
-        var result = await _context.Set<Tutorial>().Include(t => t.Chapters).FirstOrDefaultAsync(t => t.Id == id && t.IsDeleted==0);
+        var result = await _context.Set<Tutorial>().Include(t => t.Chapters)
+            .FirstOrDefaultAsync(t => t.Id == id && t.IsDeleted == 0);
         return result;
     }
 
     public async Task<Tutorial?> GetTutoriaByTitleAsync(string title)
     {
-        var result = await _context.Set<Tutorial>().FirstOrDefaultAsync(t => t.Title == title && t.IsDeleted==0);
+        var result = await _context.Set<Tutorial>().FirstOrDefaultAsync(t => t.Title == title && t.IsDeleted == 0);
         return result;
     }
 }

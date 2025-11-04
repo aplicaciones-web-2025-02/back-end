@@ -78,7 +78,6 @@ builder.Services.AddTransient<IEnrolmentCommandService, EnrolmentCommandService>
 var app = builder.Build();
 
 
-
 //app.UseCors(MyAllowSpecificOrigins);
 app.UseCors("AllowAll");
 // Ensure DB is created

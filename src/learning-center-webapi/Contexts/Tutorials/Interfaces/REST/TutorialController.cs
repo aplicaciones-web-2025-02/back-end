@@ -121,14 +121,15 @@ public class TutorialController(
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(Guid id)
     {
-        try{
+        try
+        {
             var command = new DeleteTutorialCommand { Id = id };
-            
+
             var result = await _tutorialCommandService.Handle(command);
-            
+
             if (result)
                 return Ok("Tutorial deleted successfully.");
-            
+
             return StatusCode(407, "Could not delete the tutorial.");
         }
         catch (TutorialNotFoundException exception)

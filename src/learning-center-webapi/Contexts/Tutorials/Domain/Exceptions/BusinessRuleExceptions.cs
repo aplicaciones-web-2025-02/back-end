@@ -6,8 +6,8 @@ public class DuplicateTutorialTitleException : Exception
         : base($"A tutorial with the title '{title}' already exists.")
     {
     }
-   
 }
+
 public class TutorialNotFoundException : Exception
 {
     public TutorialNotFoundException(Guid id)
@@ -15,6 +15,3 @@ public class TutorialNotFoundException : Exception
     {
     }
 }
-
-
-

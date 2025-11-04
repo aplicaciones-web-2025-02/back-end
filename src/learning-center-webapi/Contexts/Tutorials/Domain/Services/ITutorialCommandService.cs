@@ -6,8 +6,8 @@ public interface ITutorialCommandService
 {
     Task<Tutorial> Handle(CreateTutorialCommand command);
     Task<Tutorial> Handle(UpdateTutorialCommand command);
-    
+
     Task<Tutorial> Handle(UpdateAuthorTutorialCommand command);
 
-    Task<Boolean> Handle(DeleteTutorialCommand command);
+    Task<bool> Handle(DeleteTutorialCommand command);
 }

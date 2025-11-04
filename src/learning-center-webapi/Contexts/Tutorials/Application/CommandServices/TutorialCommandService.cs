@@ -41,49 +41,49 @@ public class TutorialCommandService(ITutorialRepository tutorialRepository, IUni
     {
         var tutorial = await tutorialRepository.FindByIdAsync(command.Id);
         if (tutorial == null)
-            throw new TutorialNotFoundException(command.Id);   
-        
+            throw new TutorialNotFoundException(command.Id);
+
         tutorial.Title = command.Title;
         tutorial.Description = command.Description;
         tutorial.PublishedDate = command.PublishedDate;
         tutorial.Author = command.Author;
         tutorial.AuthorEmail = command.AuthorEmail;
         tutorial.Level = command.Level;
-        tutorial.Views = command.Views; 
+        tutorial.Views = command.Views;
         tutorial.Tags = command.Tags;
 
         tutorialRepository.Update(tutorial);
         await unitOfWork.CompleteAsync();
 
-        return tutorial;    
+        return tutorial;
     }
 
     public async Task<Tutorial> Handle(UpdateAuthorTutorialCommand command)
     {
         var tutorial = await tutorialRepository.FindByIdAsync(command.Id);
         if (tutorial == null)
-            throw new TutorialNotFoundException(command.Id);   
+            throw new TutorialNotFoundException(command.Id);
 
         tutorial.Author = command.Author;
 
         tutorialRepository.Update(tutorial);
         await unitOfWork.CompleteAsync();
 
-    return tutorial;
+        return tutorial;
     }
 
-    public async Task<Boolean> Handle(DeleteTutorialCommand command)
+    public async Task<bool> Handle(DeleteTutorialCommand command)
     {
         var tutorial = await tutorialRepository.FindByIdAsync(command.Id);
         if (tutorial == null)
-            throw new TutorialNotFoundException(command.Id);   
-        
+            throw new TutorialNotFoundException(command.Id);
+
         /*tutorialRepository.Remove(tutorial);*/
-        
+
         tutorial.IsDeleted = 1;
         tutorialRepository.Update(tutorial);
-        
-        
+
+
         await unitOfWork.CompleteAsync();
 
         return true;

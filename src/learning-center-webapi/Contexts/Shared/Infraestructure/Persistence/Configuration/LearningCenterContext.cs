@@ -32,7 +32,7 @@ public class LearningCenterContext(DbContextOptions options) : DbContext(options
             entity.Property(t => t.Id).ValueGeneratedOnAdd();
             entity.Property(t => t.CreatedDate)
                 .IsRequired();
-                //.HasDefaultValueSql("GETDATE() ");
+            //.HasDefaultValueSql("GETDATE() ");
             entity.Property(t => t.UpdatedDate).IsRequired(false);
             entity.Property(t => t.Title).IsRequired().HasMaxLength(50);
             entity.Property(t => t.Description).HasMaxLength(200).HasColumnName("TutorialDescription");
@@ -54,7 +54,7 @@ public class LearningCenterContext(DbContextOptions options) : DbContext(options
             entity.HasKey(c => c.Id);
             entity.Property(c => c.Id).ValueGeneratedOnAdd();
             entity.Property(c => c.CreatedDate)
-                .IsRequired();//;
+                .IsRequired(); //;
             entity.Property(c => c.UpdatedDate).IsRequired(false);
             entity.Property(c => c.Name).IsRequired().HasMaxLength(100);
             entity.Property(c => c.Pages).IsRequired().HasColumnName("TotalPages").HasDefaultValue(1);
@@ -73,7 +73,7 @@ public class LearningCenterContext(DbContextOptions options) : DbContext(options
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
             entity.Property(e => e.CreatedDate)
                 .IsRequired();
-                //.HasDefaultValueSql("GETDATE() ");
+            //.HasDefaultValueSql("GETDATE() ");
             entity.Property(e => e.UpdatedDate).IsRequired(false);
             entity.Property(e => e.UserId).IsRequired();
             entity.Property(e => e.TutorialId).IsRequired();
