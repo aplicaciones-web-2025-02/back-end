@@ -6,15 +6,18 @@ using learning_center_webapi.Contexts.Enrolments.Infraestructure;
 using learning_center_webapi.Contexts.Security.Application.CommandServices;
 using learning_center_webapi.Contexts.Security.Domain.Infraestructure;
 using learning_center_webapi.Contexts.Security.Infraestructure;
+using learning_center_webapi.Contexts.Shared.Domain.Filters;
 using learning_center_webapi.Contexts.Shared.Domain.Repositories;
 using learning_center_webapi.Contexts.Shared.Infraestructure.Persistence.Configuration;
 using learning_center_webapi.Contexts.Shared.Infraestructure.Repositories;
+using learning_center_webapi.Contexts.Tutorials.Application.ACL;
 using learning_center_webapi.Contexts.Tutorials.Application.CommandServices;
 using learning_center_webapi.Contexts.Tutorials.Application.QueryServices;
 using learning_center_webapi.Contexts.Tutorials.Domain.Commands;
 using learning_center_webapi.Contexts.Tutorials.Domain.Infraestructure;
 using learning_center_webapi.Contexts.Tutorials.Domain.Queries;
 using learning_center_webapi.Contexts.Tutorials.Infraestructure;
+using learning_center_webapi.Contexts.Tutorials.Interfaces.REST.ACL;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -78,6 +81,13 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
 });
 
 
+
+
+
+
+//Dependency injection Shared
+builder.Services.AddTransient<ITutorialFacade, TutorialFacade>();
+
 //Dependency injection Tutorials
 builder.Services.AddTransient<ITutorialRepository, TutorialRepository>();
 builder.Services.AddTransient<ITutorialQueryService, TutorialQueryService>();
@@ -96,9 +106,26 @@ builder.Services.AddTransient<IUserCommandService, UserCommandService>();
 builder.Services.AddTransient<IUserQueryService, UserQueryService>();
 
 
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    var supportedCultures = new[] { "en", "es"};
+    options.SetDefaultCulture(supportedCultures[0])
+        .AddSupportedCultures(supportedCultures)
+        .AddSupportedUICultures(supportedCultures);
+});
+
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add<ExceptionFilter>();
+});
+
 var app = builder.Build();
 
 // Después del app.Build()
+app.UseRequestLocalization();
+
 app.UseRequestLocalization();
 
 //app.UseCors(MyAllowSpecificOrigins);

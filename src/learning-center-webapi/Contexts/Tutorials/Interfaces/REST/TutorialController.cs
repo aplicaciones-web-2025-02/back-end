@@ -13,18 +13,12 @@ namespace learning_center_webapi.Contexts.Tutorials.Interfaces.REST;
 public class TutorialController(
     ITutorialQueryService tutorialQueryService,
     ITutorialCommandService tutorialCommandService,
-    //IStringLocalizer<TutorialController> localizer,
     IStringLocalizerFactory factory
 ) : ControllerBase
 {
     private readonly ITutorialCommandService _tutorialCommandService = tutorialCommandService;
     private readonly ITutorialQueryService _tutorialQueryService = tutorialQueryService;
-    //private readonly IStringLocalizer<TutorialController> localizer = localizer;
-    
-
     private readonly IStringLocalizer localizer = factory.Create("Tutorials.TutorialController", "learning_center_webapi");
-
-        
 
     /// <summary>
     /// Gets all tutorials
@@ -48,14 +42,14 @@ public class TutorialController(
         var query = new GetByidTutorial(id);
         var tutorial = await _tutorialQueryService.Handle(query);
 
-        if (tutorial == null)
+        if (tutorial is null)
         {
-            var notFoundMessage = (string)localizer["TutorialNotFound"];
-            return StatusCode(404, new { message = notFoundMessage });
+            var notFoundMessage = localizer["TutorialNotFound"].Value;
+            return NotFound(new { message = notFoundMessage });
         }
 
-        var resources = TutorialResourceFromEntityAssembler.ToResource(tutorial);
-        return Ok(resources);
+        var resource = TutorialResourceFromEntityAssembler.ToResource(tutorial);
+        return Ok(resource);
     }
 
     [HttpPost]
@@ -65,15 +59,15 @@ public class TutorialController(
         {
             var result = await _tutorialCommandService.Handle(command);
             return CreatedAtAction(nameof(Get), new { id = result.Id },
-                new { id = result.Id, message = localizer["TutorialCreatedSuccessfully"] });
+                new { id = result.Id, message = localizer["TutorialCreated"] });
         }
-        catch (ArgumentException ex)
+        catch (DuplicateTutorialTitleException ex)
         {
-            return StatusCode(409, new { message = ex.Message });
+            return StatusCode(409, new { message = string.Format(localizer["DuplicateTutorialTitle"], ex.Title) });
         }
         catch (Exception)
         {
-            return StatusCode(500, new { message = localizer["InternalServerError"] });
+            return StatusCode(500, new { message = localizer["ErrorCreatingTutorial"] });
         }
     }
 
@@ -84,7 +78,7 @@ public class TutorialController(
         {
             command.Id = id;
             var result = await _tutorialCommandService.Handle(command);
-            return Ok(new { message = localizer["TutorialUpdatedSuccessfully"] });
+            return Ok(new { message = localizer["TutorialUpdated"] });
         }
         catch (TutorialNotFoundException)
         {
@@ -92,7 +86,7 @@ public class TutorialController(
         }
         catch (Exception)
         {
-            return StatusCode(500, new { message = localizer["InternalServerError"] });
+            return StatusCode(500, new { message = localizer["ErrorUpdatingTutorial"] });
         }
     }
 
@@ -103,7 +97,7 @@ public class TutorialController(
         {
             command.Id = id;
             var result = await _tutorialCommandService.Handle(command);
-            return Ok(new { message = localizer["AuthorUpdatedSuccessfully"] });
+            return Ok(new { message = localizer["TutorialUpdated"] });
         }
         catch (TutorialNotFoundException)
         {
@@ -111,9 +105,10 @@ public class TutorialController(
         }
         catch (Exception)
         {
-            return StatusCode(500, new { message = localizer["InternalServerError"] });
+            return StatusCode(500, new { message = localizer["ErrorUpdatingTutorial"] });
         }
     }
+
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(Guid id)
     {
@@ -124,17 +119,21 @@ public class TutorialController(
 
             if (result)
             {
-                var message = (string)localizer["TutorialDeletedSuccessfully"];
+                var message = localizer["TutorialDeleted"].Value;
                 return Ok(new { message });
             }
 
-            var errorMessage = (string)localizer["CouldNotDeleteTutorial"];
+            var errorMessage = localizer["ErrorDeletingTutorial"].Value;
             return StatusCode(400, new { message = errorMessage });
         }
         catch (TutorialNotFoundException)
         {
-            var notFoundMessage = (string)localizer["TutorialNotFound"];
+            var notFoundMessage = localizer["TutorialNotFound"].Value;
             return StatusCode(404, new { message = notFoundMessage });
+        }
+        catch (Exception)
+        {
+            return StatusCode(500, new { message = localizer["ErrorDeletingTutorial"] });
         }
     }
 }

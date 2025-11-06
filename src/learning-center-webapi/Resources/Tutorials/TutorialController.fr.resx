@@ -60,4 +60,10 @@
     <data name="CouldNotDeleteTutorial" xml:space="preserve">
         <value>Impossible de supprimer le tutoriel</value>
     </data>
+    <data name="DuplicateTutorialTitle" xml:space="preserve">
+        <value>Un tutoriel avec le titre '{0}' existe déjà.</value>
+    </data>
+    <data name="TutorialNotFoundById" xml:space="preserve">
+        <value>Un tutoriel avec l'id '{0}' n'existe pas.</value>
+    </data>
 </root>

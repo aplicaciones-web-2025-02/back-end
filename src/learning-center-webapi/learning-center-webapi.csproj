@@ -29,6 +29,26 @@
         <Folder Include="Contexts\Shared\Application\"/>
         <Folder Include="Contexts\Shared\Interfaces\"/>
         <Folder Include="Contexts\Tutorials\Interfaces\SOAP\"/>
+        <Folder Include="Resources\Enrollments\" />
+        <Folder Include="Resources\Security\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="Resources\Tutorials\TutorialController.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>TutorialController.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Resources\Tutorials\TutorialController.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>TutorialController.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Tutorials\TutorialController.en.resx">
+        <DependentUpon>TutorialController.resx</DependentUpon>
+      </Compile>
     </ItemGroup>
 
 

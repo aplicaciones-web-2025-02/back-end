@@ -1,4 +1,11 @@
-﻿<root>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+            
+        </xsd:element>
+    </xsd:schema>
     <resheader name="resmimetype">
         <value>text/microsoft-resx</value>
     </resheader>
@@ -35,22 +42,10 @@
     <data name="NoTutorialsFound" xml:space="preserve">
         <value>No se encontraron tutoriales</value>
     </data>
-    <data name="TutorialCreatedSuccessfully" xml:space="preserve">
-        <value>Tutorial creado exitosamente</value>
+    <data name="DuplicateTutorialTitle" xml:space="preserve">
+        <value>Ya existe un tutorial con el título '{0}'.</value>
     </data>
-    <data name="InternalServerError" xml:space="preserve">
-        <value>Error interno del servidor</value>
-    </data>
-    <data name="TutorialUpdatedSuccessfully" xml:space="preserve">
-        <value>Tutorial actualizado exitosamente</value>
-    </data>
-    <data name="AuthorUpdatedSuccessfully" xml:space="preserve">
-        <value>Autor actualizado exitosamente</value>
-    </data>
-    <data name="TutorialDeletedSuccessfully" xml:space="preserve">
-        <value>Tutorial eliminado exitosamente</value>
-    </data>
-    <data name="CouldNotDeleteTutorial" xml:space="preserve">
-        <value>No se pudo eliminar el tutorial</value>
+    <data name="TutorialNotFoundById" xml:space="preserve">
+        <value>No existe un tutorial con el id '{0}'.</value>
     </data>
 </root>

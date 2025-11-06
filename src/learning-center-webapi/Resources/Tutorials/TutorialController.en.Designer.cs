@@ -21,14 +21,14 @@ namespace learning_center_webapi.Resources.Tutorials {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class TutorialController {
+    internal class TutorialController_en {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal TutorialController() {
+        internal TutorialController_en() {
         }
         
         /// <summary>
@@ -38,7 +38,7 @@ namespace learning_center_webapi.Resources.Tutorials {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("learning_center_webapi.Resources.Tutorials.TutorialController", typeof(TutorialController).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("learning_center_webapi.Resources.Tutorials.TutorialController.en", typeof(TutorialController_en).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -60,10 +60,8 @@ namespace learning_center_webapi.Resources.Tutorials {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to en.
+        ///   Looks up a localized string similar to The tutorial was successfully deleted with id {0}.
         /// </summary>
-<<<<<<< HEAD
-=======
         internal static string TutorialDeletedWithId {
             get {
                 return ResourceManager.GetString("TutorialDeletedWithId", resourceCulture);
@@ -71,7 +69,7 @@ namespace learning_center_webapi.Resources.Tutorials {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to en.
+        ///   Looks up a localized string similar to Unable to delete the tutorial with id {0}.
         /// </summary>
         internal static string TutorialDeleteFailed {
             get {
@@ -80,25 +78,21 @@ namespace learning_center_webapi.Resources.Tutorials {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to en .
+        ///   Looks up a localized string similar to  Tutorial not found.
         /// </summary>
->>>>>>> 0334ff500bd491d86b42cb6367b771b34ac5abe0
         internal static string TutorialNotFound {
             get {
                 return ResourceManager.GetString("TutorialNotFound", resourceCulture);
             }
         }
-<<<<<<< HEAD
-=======
         
         /// <summary>
-        ///   Looks up a localized string similar to en.
+        ///   Looks up a localized string similar to Tutorial with ID {0} was not found.
         /// </summary>
         internal static string TutorialNotFoundWithId {
             get {
                 return ResourceManager.GetString("TutorialNotFoundWithId", resourceCulture);
             }
         }
->>>>>>> 0334ff500bd491d86b42cb6367b771b34ac5abe0
     }
 }

@@ -42,22 +42,10 @@
     <data name="NoTutorialsFound" xml:space="preserve">
         <value>No tutorials found</value>
     </data>
-    <data name="TutorialCreatedSuccessfully" xml:space="preserve">
-        <value>Tutorial created successfully</value>
+    <data name="DuplicateTutorialTitle" xml:space="preserve">
+        <value>A tutorial with the title '{0}' already exists.</value>
     </data>
-    <data name="InternalServerError" xml:space="preserve">
-        <value>Internal server error</value>
-    </data>
-    <data name="TutorialUpdatedSuccessfully" xml:space="preserve">
-        <value>Tutorial updated successfully</value>
-    </data>
-    <data name="AuthorUpdatedSuccessfully" xml:space="preserve">
-        <value>Author updated successfully</value>
-    </data>
-    <data name="TutorialDeletedSuccessfully" xml:space="preserve">
-        <value>Tutorial deleted successfully</value>
-    </data>
-    <data name="CouldNotDeleteTutorial" xml:space="preserve">
-        <value>Could not delete tutorial</value>
+    <data name="TutorialNotFoundById" xml:space="preserve">
+        <value>A tutorial with the id '{0}' doesn't exists.</value>
     </data>
 </root>
