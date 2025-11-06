@@ -6,7 +6,7 @@ using learning_center_webapi.Contexts.Enrolments.Infraestructure;
 using learning_center_webapi.Contexts.Security.Application.CommandServices;
 using learning_center_webapi.Contexts.Security.Domain.Infraestructure;
 using learning_center_webapi.Contexts.Security.Infraestructure;
-using learning_center_webapi.Contexts.Shared.Domain.FIlters;
+using learning_center_webapi.Contexts.Shared.Domain.Filters;
 using learning_center_webapi.Contexts.Shared.Domain.Repositories;
 using learning_center_webapi.Contexts.Shared.Infraestructure.Persistence.Configuration;
 using learning_center_webapi.Contexts.Shared.Infraestructure.Repositories;
@@ -107,7 +107,7 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
 
 builder.Services.AddControllers(options =>
 {
-    options.Filters.Add<InternalServerExceptionFilter>();
+    options.Filters.Add<ExceptionFilter>();
 });
 
 var app = builder.Build();

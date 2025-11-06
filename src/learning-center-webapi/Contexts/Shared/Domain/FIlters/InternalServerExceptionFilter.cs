@@ -1,51 +1,37 @@
 ﻿using learning_center_webapi.Contexts.Tutorials.Domain.Exceptions;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.Logging;
 
-namespace learning_center_webapi.Contexts.Shared.Domain.FIlters;
+namespace learning_center_webapi.Contexts.Shared.Domain.Filters;
 
-public class InternalServerExceptionFilter : IExceptionFilter
+public class ExceptionFilter : IExceptionFilter
 {
+    private readonly ILogger<ExceptionFilter> _logger;
+
+    public ExceptionFilter(ILogger<ExceptionFilter> logger)
+    {
+        _logger = logger;
+    }
+
     public void OnException(ExceptionContext context)
     {
-        //Logear la excepción si es necesario
+        var exception = context.Exception;
 
-        if (context.Exception is  TutorialNotFoundException)
-        {            
-            context.HttpContext.Response.StatusCode = 404;
-            context.Result = new Microsoft.AspNetCore.Mvc.JsonResult(new
-            {
-                message = "Tutorial not found."
-            });
-
-        }
-        
-        if ( context.Exception is  ArgumentException)
-        {            
-            context.HttpContext.Response.StatusCode = 409;
-            context.Result = new Microsoft.AspNetCore.Mvc.JsonResult(new
-            {
-                message = "Unauthorized access."
-            });
-
-        }
-        
-        if (context.Exception is  DuplicateTutorialTitleException)
-        {            
-            context.HttpContext.Response.StatusCode = 407;
-            context.Result = new Microsoft.AspNetCore.Mvc.JsonResult(new
-            {
-                message = "Bad request."
-            });
-        }
-
-        if (context.Exception is not TutorialNotFoundException and not ArgumentException and not DuplicateTutorialTitleException and not DuplicateTutorialTitleException)  
+        var (statusCode, message) = exception switch
         {
+            TutorialNotFoundException => (StatusCodes.Status404NotFound, exception.Message),
+            ArgumentException => (StatusCodes.Status409Conflict, exception.Message),
+            DuplicateTutorialTitleException => (StatusCodes.Status400BadRequest, exception.Message),
+            _ => (StatusCodes.Status500InternalServerError, "An internal server error occurred. Please try again later.")
+        };
 
-            context.HttpContext.Response.StatusCode = 500;
-            context.Result = new Microsoft.AspNetCore.Mvc.JsonResult(new
-            {
-                message = "An internal server error occurred. Please try again later."
-            });
-        }
+        // Simulación de logeo según tipo de error
+        if (statusCode == StatusCodes.Status500InternalServerError)
+            _logger.LogError(exception, "Unhandled exception occurred.");
+        else
+            _logger.LogWarning(exception, "Handled domain exception: {Message}", message);
+
+        context.Result = new JsonResult(new { message }) { StatusCode = statusCode };
     }
 }
