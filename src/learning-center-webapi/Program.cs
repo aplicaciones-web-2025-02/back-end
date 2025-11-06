@@ -66,6 +66,17 @@ builder.Services.AddDbContext<LearningCenterContext>(options =>
             .EnableDetailedErrors();
 });
 
+// Configurar servicios de localización
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    var supportedCultures = new[] { "en", "es"};
+    options.SetDefaultCulture(supportedCultures[0])
+        .AddSupportedCultures(supportedCultures)
+        .AddSupportedUICultures(supportedCultures);
+});
+
 
 //Dependency injection Tutorials
 builder.Services.AddTransient<ITutorialRepository, TutorialRepository>();
@@ -87,6 +98,8 @@ builder.Services.AddTransient<IUserQueryService, UserQueryService>();
 
 var app = builder.Build();
 
+// Después del app.Build()
+app.UseRequestLocalization();
 
 //app.UseCors(MyAllowSpecificOrigins);
 app.UseCors("AllowAll");
