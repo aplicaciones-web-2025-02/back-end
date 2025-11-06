@@ -5,11 +5,13 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <RootNamespace>learning_center_webapi</RootNamespace>
+        <AssemblyName>learning_center_webapi</AssemblyName>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.10"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.10"/>
+        <PackageReference Include="Microsoft.Extensions.Localization" Version="9.0.10" />
         <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0"/>
         <PackageReference Include="MySql.EntityFrameworkCore" Version="9.0.9"/>
     </ItemGroup>
@@ -26,6 +28,44 @@
         <Folder Include="Contexts\Shared\Application\"/>
         <Folder Include="Contexts\Shared\Interfaces\"/>
         <Folder Include="Contexts\Tutorials\Interfaces\SOAP\"/>
+        <Folder Include="Resources\Enrollments\" />
+        <Folder Include="Resources\Security\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="Resources\Tutorials\TutorialController.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>TutorialController.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Tutorials\TutorialController.es.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>TutorialController.es.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Tutorials\TutorialController.en.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>TutorialController.en.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Resources\Tutorials\TutorialController.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>TutorialController.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Tutorials\TutorialController.en.resx">
+        <DependentUpon>TutorialController.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Tutorials\TutorialController.es.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>TutorialController.es.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Tutorials\TutorialController.en.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>TutorialController.en.resx</DependentUpon>
+      </Compile>
     </ItemGroup>
 
 </Project>

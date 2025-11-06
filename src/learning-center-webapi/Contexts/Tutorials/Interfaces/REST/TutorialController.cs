@@ -4,6 +4,7 @@ using learning_center_webapi.Contexts.Tutorials.Domain.Model.Queries;
 using learning_center_webapi.Contexts.Tutorials.Domain.Queries;
 using learning_center_webapi.Contexts.Tutorials.Interfaces.REST.Transform;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 
 namespace learning_center_webapi.Contexts.Tutorials.Interfaces.REST;
 
@@ -11,8 +12,16 @@ namespace learning_center_webapi.Contexts.Tutorials.Interfaces.REST;
 [ApiController]
 public class TutorialController(
     ITutorialQueryService tutorialQueryService,
-    ITutorialCommandService tutorialCommandService) : ControllerBase
+    ITutorialCommandService tutorialCommandService,
+    IStringLocalizerFactory factory
+    
+    ) : ControllerBase
 {
+
+    
+     private readonly IStringLocalizer localizer = factory.Create("Tutorials.TutorialController", "learning_center_webapi");
+    
+    
     private readonly ITutorialCommandService _tutorialCommandService = tutorialCommandService;
     private readonly ITutorialQueryService _tutorialQueryService = tutorialQueryService;
 
@@ -34,7 +43,7 @@ public class TutorialController(
         var query = new GetAllTutorials();
         var tutorials = await _tutorialQueryService.Handle(query);
 
-        if (!tutorials.Any()) return NotFound();
+        if (!tutorials.Any()) return NotFound( new { message = localizer["TutorialNotFound"]});
 
         var resources = tutorials.Select(TutorialResourceFromEntityAssembler.ToResource).ToList();
 
@@ -48,7 +57,8 @@ public class TutorialController(
         var query = new GetByidTutorial(id);
         var tutorial = await _tutorialQueryService.Handle(query);
 
-        if (tutorial == null) return NotFound();
+        var message = new { message = localizer["TutorialNotFound"].Value };
+        if (tutorial == null) return NotFound(message );
 
         var resources = TutorialResourceFromEntityAssembler.ToResource(tutorial);
 

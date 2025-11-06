@@ -67,6 +67,12 @@ builder.Services.AddDbContext<LearningCenterContext>(options =>
 });
 
 
+
+
+
+
+
+
 //Dependency injection Tutorials
 builder.Services.AddTransient<ITutorialRepository, TutorialRepository>();
 builder.Services.AddTransient<ITutorialQueryService, TutorialQueryService>();
@@ -85,8 +91,21 @@ builder.Services.AddTransient<IUserCommandService, UserCommandService>();
 builder.Services.AddTransient<IUserQueryService, UserQueryService>();
 
 
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    var supportedCultures = new[] { "en", "es"};
+    options.SetDefaultCulture(supportedCultures[0])
+        .AddSupportedCultures(supportedCultures)
+        .AddSupportedUICultures(supportedCultures);
+});
+
+
 var app = builder.Build();
 
+
+app.UseRequestLocalization();
 
 //app.UseCors(MyAllowSpecificOrigins);
 app.UseCors("AllowAll");
