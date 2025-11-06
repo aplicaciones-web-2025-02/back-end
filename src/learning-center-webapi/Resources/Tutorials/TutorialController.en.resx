@@ -21,4 +21,13 @@
     <data name="TutorialNotFound" xml:space="preserve">
         <value> Tutorial not found</value>
     </data>
+    <data name="TutorialDeletedWithId" xml:space="preserve">
+        <value>The tutorial was successfully deleted with id {0}</value>
+    </data>
+    <data name="TutorialDeleteFailed" xml:space="preserve">
+        <value>Unable to delete the tutorial with id {0}</value>
+    </data>
+    <data name="TutorialNotFoundWithId" xml:space="preserve">
+        <value>Tutorial with ID {0} was not found</value>
+    </data>
 </root>

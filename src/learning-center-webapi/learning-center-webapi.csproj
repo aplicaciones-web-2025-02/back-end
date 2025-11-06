@@ -37,14 +37,6 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>TutorialController.Designer.cs</LastGenOutput>
       </EmbeddedResource>
-      <EmbeddedResource Update="Resources\Tutorials\TutorialController.es.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>TutorialController.es.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
-      <EmbeddedResource Update="Resources\Tutorials\TutorialController.en.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>TutorialController.en.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
@@ -55,16 +47,6 @@
       </Compile>
       <Compile Update="Resources\Tutorials\TutorialController.en.resx">
         <DependentUpon>TutorialController.resx</DependentUpon>
-      </Compile>
-      <Compile Update="Resources\Tutorials\TutorialController.es.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>TutorialController.es.resx</DependentUpon>
-      </Compile>
-      <Compile Update="Resources\Tutorials\TutorialController.en.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>TutorialController.en.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 

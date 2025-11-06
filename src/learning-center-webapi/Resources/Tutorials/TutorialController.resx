@@ -21,4 +21,13 @@
     <data name="TutorialNotFound" xml:space="preserve">
         <value>en </value>
     </data>
+    <data name="TutorialDeletedWithId" xml:space="preserve">
+        <value>en</value>
+    </data>
+    <data name="TutorialDeleteFailed" xml:space="preserve">
+        <value>en</value>
+    </data>
+    <data name="TutorialNotFoundWithId" xml:space="preserve">
+        <value>en</value>
+    </data>
 </root>

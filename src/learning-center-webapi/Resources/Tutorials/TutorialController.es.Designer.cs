@@ -60,11 +60,38 @@ namespace learning_center_webapi.Resources.Tutorials {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to El tutorial fue eliminado correctamente with id {0}.
+        /// </summary>
+        internal static string TutorialDeletedWithId {
+            get {
+                return ResourceManager.GetString("TutorialDeletedWithId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No se pudo eliminar el tutorial con id {0}.
+        /// </summary>
+        internal static string TutorialDeleteFailed {
+            get {
+                return ResourceManager.GetString("TutorialDeleteFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tutorial no ecnotrado.
         /// </summary>
         internal static string TutorialNotFound {
             get {
                 return ResourceManager.GetString("TutorialNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No se encontró el tutorial con ID {0}.
+        /// </summary>
+        internal static string TutorialNotFoundWithId {
+            get {
+                return ResourceManager.GetString("TutorialNotFoundWithId", resourceCulture);
             }
         }
     }

@@ -75,7 +75,7 @@ public class TutorialCommandService(ITutorialRepository tutorialRepository, IUni
     public async Task<bool> Handle(DeleteTutorialCommand command)
     {
         var tutorial = await tutorialRepository.FindByIdAsync(command.Id);
-        if (tutorial == null)
+        if (tutorial == null || tutorial.IsDeleted == 1)    
             throw new TutorialNotFoundException(command.Id);
 
         /*tutorialRepository.Remove(tutorial);*/
