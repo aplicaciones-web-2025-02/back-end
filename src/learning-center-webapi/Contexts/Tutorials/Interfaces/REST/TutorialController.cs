@@ -55,85 +55,40 @@ public class TutorialController(
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] CreateTutorialCommand command)
     {
-        try
-        {
-            var result = await _tutorialCommandService.Handle(command);
-            return CreatedAtAction(nameof(Get), new { id = result.Id },
-                new { id = result.Id, message = localizer["TutorialCreated"] });
-        }
-        catch (DuplicateTutorialTitleException ex)
-        {
-            return StatusCode(409, new { message = string.Format(localizer["DuplicateTutorialTitle"], ex.Title) });
-        }
-        catch (Exception)
-        {
-            return StatusCode(500, new { message = localizer["ErrorCreatingTutorial"] });
-        }
+        var result = await _tutorialCommandService.Handle(command);
+        return CreatedAtAction(nameof(Get), new { id = result.Id },
+            new { id = result.Id, message = localizer["TutorialCreated"] });
     }
 
     [HttpPut("{id}")]
     public async Task<IActionResult> Put(Guid id, [FromBody] UpdateTutorialCommand command)
     {
-        try
-        {
-            command.Id = id;
-            var result = await _tutorialCommandService.Handle(command);
-            return Ok(new { message = localizer["TutorialUpdated"] });
-        }
-        catch (TutorialNotFoundException)
-        {
-            return StatusCode(404, new { message = localizer["TutorialNotFound"] });
-        }
-        catch (Exception)
-        {
-            return StatusCode(500, new { message = localizer["ErrorUpdatingTutorial"] });
-        }
+        command.Id = id;
+        var result = await _tutorialCommandService.Handle(command);
+        return Ok(new { message = localizer["TutorialUpdated"] });
     }
 
     [HttpPatch("{id}")]
     public async Task<IActionResult> Patch(Guid id, [FromBody] UpdateAuthorTutorialCommand command)
     {
-        try
-        {
-            command.Id = id;
-            var result = await _tutorialCommandService.Handle(command);
-            return Ok(new { message = localizer["TutorialUpdated"] });
-        }
-        catch (TutorialNotFoundException)
-        {
-            return StatusCode(404, new { message = localizer["TutorialNotFound"] });
-        }
-        catch (Exception)
-        {
-            return StatusCode(500, new { message = localizer["ErrorUpdatingTutorial"] });
-        }
+        command.Id = id;
+        var result = await _tutorialCommandService.Handle(command);
+        return Ok(new { message = localizer["TutorialUpdated"] });
     }
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(Guid id)
     {
-        try
-        {
-            var command = new DeleteTutorialCommand { Id = id };
-            var result = await _tutorialCommandService.Handle(command);
+        var command = new DeleteTutorialCommand { Id = id };
+        var result = await _tutorialCommandService.Handle(command);
 
-            if (result)
-            {
-                var message = localizer["TutorialDeleted"].Value;
-                return Ok(new { message });
-            }
+        if (result)
+        {
+            var message = localizer["TutorialDeleted"].Value;
+            return Ok(new { message });
+        }
 
-            var errorMessage = localizer["ErrorDeletingTutorial"].Value;
-            return StatusCode(400, new { message = errorMessage });
-        }
-        catch (TutorialNotFoundException)
-        {
-            var notFoundMessage = localizer["TutorialNotFound"].Value;
-            return StatusCode(404, new { message = notFoundMessage });
-        }
-        catch (Exception)
-        {
-            return StatusCode(500, new { message = localizer["ErrorDeletingTutorial"] });
-        }
+        var errorMessage = localizer["ErrorDeletingTutorial"].Value;
+        return StatusCode(400, new { message = errorMessage });
     }
 }

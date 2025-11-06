@@ -1,7 +1,6 @@
 using learning_center_webapi.Contexts.Enrolments.Application.CommandServices;
 using learning_center_webapi.Contexts.Enrolments.Application.QueryServices;
 using learning_center_webapi.Contexts.Enrolments.Domain.Model;
-using learning_center_webapi.Contexts.Enrolments.Domain.Model.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace learning_center_webapi.Contexts.Enrolments.Interfaces.REST;
@@ -29,19 +28,8 @@ public class EnrolmentController(IEnrolmentCommandService commandService, IEnrol
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateEnrolmentCommand command)
     {
-        try
-        {
-            var result = await commandService.CreateAsync(command);
-            return CreatedAtAction(nameof(GetById), new { id = result.Id }, result.Id);
-        }
-        catch (TutorialNotExistExceptions ex)
-        {
-            return StatusCode(407, ex.Message);
-        }
-        catch (UserNotExistExceptions ex)
-        {
-            return StatusCode(407, ex.Message);
-        }
+        var result = await commandService.CreateAsync(command);
+        return CreatedAtAction(nameof(GetById), new { id = result.Id }, result.Id);
     }
 
     [HttpPut("{id}")]
