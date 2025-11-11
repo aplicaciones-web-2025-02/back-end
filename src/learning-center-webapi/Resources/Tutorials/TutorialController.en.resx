@@ -48,4 +48,7 @@
     <data name="TutorialNotFoundById" xml:space="preserve">
         <value>A tutorial with the id '{0}' doesn't exists.</value>
     </data>
+    <data name="TutorialIdDescription" xml:space="preserve">
+        <value>This is the identifier</value>
+    </data>
 </root>

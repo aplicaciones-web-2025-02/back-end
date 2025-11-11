@@ -89,6 +89,11 @@ public class TutorialCommandService(ITutorialRepository tutorialRepository, IUni
         return true;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="command"></param>
+    /// <returns></returns>
     private Tutorial CreateTutorialFromCommand(CreateTutorialCommand command)
     {
         return new Tutorial

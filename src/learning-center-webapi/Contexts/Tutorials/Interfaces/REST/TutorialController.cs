@@ -23,6 +23,7 @@ public class TutorialController(
     /// <summary>
     /// Gets all tutorials
     /// </summary>
+    /// <returns>all active tutorials </returns>
     [HttpGet]
     public async Task<IActionResult> Get()
     {
@@ -40,8 +41,8 @@ public class TutorialController(
     /// <summary>
     /// Get active Tutorial by id.
     /// </summary>
-    /// <param name="id"> This is the identifier</param>
-    /// <returns></returns>
+    /// <param name="id"><see cref="localizer["TutorialIdDescription"]"/></param>
+    /// <returns>A found active tutorial by id</returns>
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(Guid id)
     {
@@ -58,7 +59,34 @@ public class TutorialController(
         return Ok(resource);
     }
 
+    /// <summary>
+    /// Creat a new tutorial
+    /// </summary>
+    /// <remarks>
+    /// - this method is only for admin users.
+    /// - this endopont is available at night time.
+    /// 
+    /// POST /Tutorial
+    /// { 
+    ///         "title": "Tutorial Java",
+    ///          "description": "This is tutorial for learning Java from scratch",   
+    ///          "publishedDate": "2025-11-11T01:15:13.623Z",
+    ///          "author": "string",
+    ///          "authorEmail": "string",
+    ///          "level": 0,
+    ///          "views": 0,
+    ///           "tags": "open source"
+    ///}
+    /// </remarks>
+    /// <returns>The recently created id of tutorial</returns>
+    /// <response code="201">Tutorial created successfully</response>
+    /// <response code="409">Error with bussiness rules</response>
+    /// <response code="500">Internal server error for unhandled expections</response>
     [HttpPost]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status409Conflict)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [Produces("application/json")]
     public async Task<IActionResult> Post([FromBody] CreateTutorialCommand command)
     {
         var result = await _tutorialCommandService.Handle(command);
