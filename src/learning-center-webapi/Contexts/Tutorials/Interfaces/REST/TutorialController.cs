@@ -35,7 +35,13 @@ public class TutorialController(
         var resources = tutorials.Select(TutorialResourceFromEntityAssembler.ToResource).ToList();
         return Ok(resources);
     }
-
+    
+    
+    /// <summary>
+    /// Get active Tutorial by id.
+    /// </summary>
+    /// <param name="id"> This is the identifier</param>
+    /// <returns></returns>
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(Guid id)
     {
