@@ -88,6 +88,9 @@ builder.Services.AddTransient<IEnrolmentCommandService, EnrolmentCommandService>
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IUserCommandService, UserCommandService>();
 builder.Services.AddTransient<IUserQueryService, UserQueryService>();
+builder.Services.AddTransient<IHashService, HashService>();
+
+
 
 builder.Services.AddControllers(options =>
 {

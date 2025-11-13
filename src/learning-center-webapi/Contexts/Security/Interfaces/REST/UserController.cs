@@ -36,5 +36,19 @@ public class UserController(IUserCommandService userCommandService, IUserQuerySe
         var user = await userCommandService.Handle(command);
         var resource = UserResourceFromEntityAssembler.ToResource(user);
         return CreatedAtAction(nameof(Create), new { id = resource.Id }, resource.Id);
+    }    
+    
+    [HttpPost]
+    [Route("login")]
+    public async Task<IActionResult> Create([FromBody] LoginUserCommand command)
+    {
+        var result = await userCommandService.Handle(command);
+
+        if (result)
+            return Ok();
+        else
+        {
+            return Unauthorized();
+        }
     }
 }

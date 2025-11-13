@@ -1,5 +1,6 @@
 ﻿using learning_center_webapi.Contexts.Tutorials.Domain.Exceptions;
 using learning_center_webapi.Contexts.Enrolments.Domain.Model.Exceptions;
+using learning_center_webapi.Contexts.Security.Domain.Model.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Localization;
@@ -29,6 +30,7 @@ public class ExceptionFilter : IExceptionFilter
             TutorialNotExistExceptions => (StatusCodes.Status404NotFound, exception.Message),
             UserNotExistExceptions => (StatusCodes.Status404NotFound, exception.Message),
             ArgumentException => (StatusCodes.Status400BadRequest, exception.Message),
+            SecurityExceptions.LoginException => (StatusCodes.Status401Unauthorized, exception.Message),
             _ => (StatusCodes.Status500InternalServerError, _localizer["ErrorCreatingTutorial"].Value)
         };
 
