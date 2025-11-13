@@ -8,6 +8,7 @@
         <AssemblyName>learning_center_webapi</AssemblyName>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <NoWarn>$(NoWarn);1591</NoWarn>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
     <ItemGroup>
@@ -62,6 +63,13 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>TutorialController.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+    </ItemGroup>
+
+
+    <ItemGroup>
+      <Content Include="..\..\.dockerignore">
+        <Link>.dockerignore</Link>
+      </Content>
     </ItemGroup>
 
 </Project>
