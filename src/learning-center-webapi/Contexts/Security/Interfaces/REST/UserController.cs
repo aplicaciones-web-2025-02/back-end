@@ -40,15 +40,11 @@ public class UserController(IUserCommandService userCommandService, IUserQuerySe
     
     [HttpPost]
     [Route("login")]
-    public async Task<IActionResult> Create([FromBody] LoginUserCommand command)
+    public async Task<IActionResult> Login([FromBody] LoginUserCommand command)
     {
-        var result = await userCommandService.Handle(command);
-
-        if (result)
-            return Ok();
-        else
-        {
+        var jwt = await userCommandService.Handle(command);
+        if (string.IsNullOrEmpty(jwt))
             return Unauthorized();
-        }
+        return Ok(jwt);
     }
 }

@@ -6,5 +6,5 @@ namespace learning_center_webapi.Contexts.Security.Application.CommandServices;
 public interface IUserCommandService
 {
     Task<User> Handle(CreateUserCommand command);
-    Task<bool> Handle(LoginUserCommand command);
+    Task<string> Handle(LoginUserCommand command);
 }

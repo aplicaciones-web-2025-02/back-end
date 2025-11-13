@@ -89,7 +89,7 @@ builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IUserCommandService, UserCommandService>();
 builder.Services.AddTransient<IUserQueryService, UserQueryService>();
 builder.Services.AddTransient<IHashService, HashService>();
-
+builder.Services.AddTransient<IJWTEncrypter,JWTEncrypter>();
 
 
 builder.Services.AddControllers(options =>
