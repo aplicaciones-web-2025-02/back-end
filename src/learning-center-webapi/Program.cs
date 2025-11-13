@@ -129,11 +129,11 @@ var app = builder.Build();
 
 
 //swagger
-if (app.Environment.IsDevelopment())
-{
+//if (app.Environment.IsDevelopment())
+//{
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+//}
 
 
 // Inicializar el servicio de localización
