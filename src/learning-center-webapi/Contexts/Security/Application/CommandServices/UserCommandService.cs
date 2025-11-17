@@ -8,9 +8,9 @@ namespace learning_center_webapi.Contexts.Security.Application.CommandServices;
 
 public class UserCommandService(
     IUserRepository userRepository,
-    IHashService hashService,
+    IPasswordHashService hashService,
     IUnitOfWork unitOfWork,
-    IJWTEncrypter jwtEncrypter
+    IJwtTokenService jwtEncrypter
 ) : IUserCommandService
 {
     public async Task<User> Handle(CreateUserCommand command)

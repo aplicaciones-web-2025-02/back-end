@@ -88,8 +88,8 @@ builder.Services.AddTransient<IEnrolmentCommandService, EnrolmentCommandService>
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IUserCommandService, UserCommandService>();
 builder.Services.AddTransient<IUserQueryService, UserQueryService>();
-builder.Services.AddTransient<IHashService, HashService>();
-builder.Services.AddTransient<IJWTEncrypter,JWTEncrypter>();
+builder.Services.AddTransient<IPasswordHashService, PasswordHashService>();
+builder.Services.AddTransient<IJwtTokenService, JwtTokenService>();
 
 
 builder.Services.AddControllers(options =>

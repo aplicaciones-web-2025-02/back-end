@@ -1,8 +1,8 @@
-﻿using Org.BouncyCastle.Crypto.Generators;
+using Org.BouncyCastle.Crypto.Generators;
 
 namespace learning_center_webapi.Contexts.Security.Application.CommandServices;
 
-public class HashService : IHashService
+public class PasswordHashService : IPasswordHashService
 {
     public string HashPassword(string password)
     {
