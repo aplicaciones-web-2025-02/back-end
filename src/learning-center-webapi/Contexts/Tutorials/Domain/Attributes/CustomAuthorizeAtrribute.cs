@@ -21,7 +21,6 @@ public class CustomAuthorizeAtrribute : Attribute, IAsyncAuthorizationFilter
         {
             context.HttpContext.Response.StatusCode = StatusCodes.Status403Forbidden;
             await context.HttpContext.Response.WriteAsync("Forbidden: You do not have permission to access this resource");
-            return;
         }
     }
 }

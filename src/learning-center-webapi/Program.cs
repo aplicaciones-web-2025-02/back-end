@@ -98,6 +98,8 @@ builder.Services.AddControllers(options =>
     options.Filters.Add<ExceptionFilter>();
 });
 
+builder.Services.AddResponseCompression();
+
 //Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
@@ -128,6 +130,9 @@ builder.Services.AddSwaggerGen(options =>
 
 var app = builder.Build();
 
+
+
+app.UseResponseCompression();
 
 //swagger
 //if (app.Environment.IsDevelopment())

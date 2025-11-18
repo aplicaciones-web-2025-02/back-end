@@ -23,6 +23,7 @@ public class TutorialRepository(LearningCenterContext context) : BaseRepository<
         return result;
     }
 
+    
     public async Task<Tutorial?> GetTutoriaByTitleAsync(string title)
     {
         var result = await _context.Set<Tutorial>().FirstOrDefaultAsync(t => t.Title == title && t.IsDeleted == 0);
