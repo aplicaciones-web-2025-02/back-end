@@ -1,3 +1,4 @@
+using learning_center_webapi.Contexts.Tutorials.Domain.Attributes;
 using learning_center_webapi.Contexts.Tutorials.Domain.Commands;
 using learning_center_webapi.Contexts.Tutorials.Domain.Exceptions;
 using learning_center_webapi.Contexts.Tutorials.Domain.Model.Queries;
@@ -25,6 +26,7 @@ public class TutorialController(
     /// </summary>
     /// <returns>all active tutorials </returns>
     [HttpGet]
+    [CustomAuthorizeAtrribute("mkt,admin")]
     public async Task<IActionResult> Get()
     {
         var query = new GetAllTutorials();
@@ -44,6 +46,7 @@ public class TutorialController(
     /// <param name="id"><see cref="localizer["TutorialIdDescription"]"/></param>
     /// <returns>A found active tutorial by id</returns>
     [HttpGet("{id}")]
+    [CustomAuthorizeAtrribute("mkt,admin")]
     public async Task<IActionResult> Get(Guid id)
     {
         var query = new GetByidTutorial(id);
@@ -87,6 +90,8 @@ public class TutorialController(
     [ProducesResponseType(StatusCodes.Status409Conflict)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [Produces("application/json")]
+    [CustomAuthorizeAtrribute("admin")]
+    
     public async Task<IActionResult> Post([FromBody] CreateTutorialCommand command)
     {
         var result = await _tutorialCommandService.Handle(command);
@@ -103,6 +108,7 @@ public class TutorialController(
     }
 
     [HttpPatch("{id}")]
+    
     public async Task<IActionResult> Patch(Guid id, [FromBody] UpdateAuthorTutorialCommand command)
     {
         command.Id = id;

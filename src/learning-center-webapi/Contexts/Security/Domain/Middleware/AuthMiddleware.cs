@@ -15,6 +15,14 @@ public class AuthMiddleware
     public async Task InvokeAsync(HttpContext context,IJwtTokenService jwtTokenService)
     {
 
+        var isAnonymousEndpoint = context.GetEndpoint()?.Metadata.GetMetadata<Microsoft.AspNetCore.Authorization.AllowAnonymousAttribute>() != null;
+        if (isAnonymousEndpoint)
+        {
+            await _next(context);;
+            return;
+        }
+        
+        
         var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
         
         if (token is null)

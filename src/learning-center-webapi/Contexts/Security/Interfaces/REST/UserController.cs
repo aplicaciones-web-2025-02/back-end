@@ -4,6 +4,7 @@ using learning_center_webapi.Contexts.Security.Application.CommandServices;
 using learning_center_webapi.Contexts.Security.Application.QueryServices;
 using learning_center_webapi.Contexts.Security.Interfaces.REST.Resources;
 using learning_center_webapi.Contexts.Security.Interfaces.REST.Transform;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace learning_center_webapi.Contexts.Security.Interfaces.REST;
@@ -31,6 +32,7 @@ public class UserController(IUserCommandService userCommandService, IUserQuerySe
     }
 
     [HttpPost]
+    [AllowAnonymous]
     public async Task<IActionResult> Create([FromBody] CreateUserCommand command)
     {
         var user = await userCommandService.Handle(command);
@@ -39,6 +41,7 @@ public class UserController(IUserCommandService userCommandService, IUserQuerySe
     }    
     
     [HttpPost]
+    [AllowAnonymous]
     [Route("login")]
     public async Task<IActionResult> Login([FromBody] LoginUserCommand command)
     {
