@@ -6,6 +6,7 @@ using learning_center_webapi.Contexts.Enrolments.Domain.Infraestructure;
 using learning_center_webapi.Contexts.Enrolments.Infraestructure;
 using learning_center_webapi.Contexts.Security.Application.CommandServices;
 using learning_center_webapi.Contexts.Security.Domain.Infraestructure;
+using learning_center_webapi.Contexts.Security.Domain.Middleware;
 using learning_center_webapi.Contexts.Security.Infraestructure;
 using learning_center_webapi.Contexts.Shared.Domain.Filters;
 using learning_center_webapi.Contexts.Shared.Domain.Repositories;
@@ -156,6 +157,9 @@ using (var scope = app.Services.CreateScope())
 // Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment()) 
     app.MapOpenApi();
+
+
+app.UseMiddleware<AuthMiddleware>();
 
 app.UseHttpsRedirection();
 

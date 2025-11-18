@@ -25,10 +25,15 @@ public class TutorialCommandService(ITutorialRepository tutorialRepository, IUni
     }
     */
 
+    //funcion to create tutorial
     public async Task<Tutorial> Handle(CreateTutorialCommand command)
     {
         var tutorial = CreateTutorialFromCommand(command);
         var authorTutorials = await tutorialRepository.GetTutorialsWithChaptersAsync();
+
+        //validate max tutorials per author
+        if (command.Level > MaxLevel)
+            throw new Exception("");
 
         await ValidateDuplicateTitle(tutorial.Title);
 

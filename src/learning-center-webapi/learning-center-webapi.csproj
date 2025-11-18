@@ -31,7 +31,6 @@
         <Folder Include="Contexts\Category\Infraestructure\"/>
         <Folder Include="Contexts\Category\Interfaces\"/>
         <Folder Include="Contexts\Security\Application\"/>
-        <Folder Include="Contexts\Security\Domain\"/>
         <Folder Include="Contexts\Security\Infraestructure\"/>
         <Folder Include="Contexts\Security\Interfaces\"/>
         <Folder Include="Contexts\Shared\Application\"/>

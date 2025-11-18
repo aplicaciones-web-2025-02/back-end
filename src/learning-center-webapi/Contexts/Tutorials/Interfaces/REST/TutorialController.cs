@@ -8,7 +8,7 @@ using Microsoft.Extensions.Localization;
 
 namespace learning_center_webapi.Contexts.Tutorials.Interfaces.REST;
 
-[Route("api/[controller]")]
+[Route("api/v1/[controller]")]
 [ApiController]
 public class TutorialController(
     ITutorialQueryService tutorialQueryService,
@@ -90,7 +90,7 @@ public class TutorialController(
     public async Task<IActionResult> Post([FromBody] CreateTutorialCommand command)
     {
         var result = await _tutorialCommandService.Handle(command);
-        return CreatedAtAction(nameof(Get), new { id = result.Id },
+        return CreatedAtAction(nameof(Get), new { id = result.Id },//201
             new { id = result.Id, message = localizer["TutorialCreated"] });
     }
 
@@ -107,10 +107,11 @@ public class TutorialController(
     {
         command.Id = id;
         var result = await _tutorialCommandService.Handle(command);
-        return Ok(new { message = localizer["TutorialUpdated"] });
+        return Ok(new { message = localizer["TutorialUpdated"] });//200
     }
 
     [HttpDelete("{id}")]
+    [Route("my-ow-route")]
     public async Task<IActionResult> Delete(Guid id)
     {
         var command = new DeleteTutorialCommand { Id = id };
@@ -119,10 +120,12 @@ public class TutorialController(
         if (result)
         {
             var message = localizer["TutorialDeleted"].Value;
-            return Ok(new { message });
+            //return Ok(new { message });
+            return StatusCode(508);
+
         }
 
         var errorMessage = localizer["ErrorDeletingTutorial"].Value;
-        return StatusCode(400, new { message = errorMessage });
+        return StatusCode(400, new { message = errorMessage });//bad
     }
 }
